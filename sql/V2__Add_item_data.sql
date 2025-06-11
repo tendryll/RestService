@@ -1,0 +1,1 @@
+insert into item(name, description) values ('thing', 'Cogito, ergo sum');
