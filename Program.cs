@@ -10,8 +10,7 @@ builder.Services.AddOpenApiDocument();
 var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
                        ?? throw new InvalidOperationException("DB_CONNECTION_STRING is not set.");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 

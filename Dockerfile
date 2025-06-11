@@ -1,19 +1,11 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
-EXPOSE 80
+COPY *.csproj ./
+RUN dotnet restore
+COPY . ./
+RUN dotnet publish -o /app/out
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["MyService/MyService.csproj", "MyService/"]
-RUN dotnet restore "MyService/MyService.csproj"
-COPY . .
-WORKDIR "/src/MyService"
-RUN dotnet build "MyService.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "MyService.csproj" -c Release -o /app/publish
-
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MyService.dll"]
+COPY --from=build /app/out .
+ENTRYPOINT ["dotnet", "RestService.dll"]

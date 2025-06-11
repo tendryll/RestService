@@ -1,6 +1,14 @@
-@RestService_HostAddress = http://localhost:5124
+@RestService_HostAddress = http://localhost:8080
 
-GET {{RestService_HostAddress}}/weatherforecast/
+GET {{RestService_HostAddress}}/api/Items/
 Accept: application/json
 
 ###
+
+POST {{RestService_HostAddress}}/api/Items/
+Content-Type: application/json
+
+{
+  "name": "Signs: The Secret Language of the Universe",
+  "description": "Laura Lynne Jackson is a psychic medium and the author of the New York Times bestseller The Light Between Us. She possesses an incredible gift: the ability to communicate with loved ones who have passed, convey messages of love and healing, and impart a greater understanding of our interconnectedness. Though her abilities are exceptional, they are not unique, and that is the message at the core of this book. Understanding “the secret language of the universe” is a gift available to all. As we learn to ask for and recognize signs from the other side, we will start to find meaning where before there was only confusion, and see light in the darkness. We may decide to change paths, push toward love, pursue joy, and engage with life in a whole new way."
+}
